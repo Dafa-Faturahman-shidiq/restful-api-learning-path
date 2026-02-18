@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detil_pesan', function (Blueprint $table) {
-            $table->integer('id_pesan')->nullable(); //* Foreign key ke tabel pesan
-            $table->string('id_produk', 5)->nullable(); //* Foreign key ke tabel produk
-            $table->integer('jumlah')->nullable();
-            $table->decimal('harga',10, 0)->nullable();
+            $table->integer('id_pesan'); //* Foreign key ke tabel pesan
+            $table->string('id_produk', 5); //* Foreign key ke tabel produk
+            $table->integer('jumlah');
+            $table->decimal('harga',10, 0);
             $table->timestamps();
 
             //*1. Menentukan Primary Key gabungan (composite primary key)

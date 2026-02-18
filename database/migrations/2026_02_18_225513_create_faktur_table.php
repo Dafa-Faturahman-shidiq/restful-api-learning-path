@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('faktur', function (Blueprint $table) {
             $table->integer('id_faktur')->primary();
-            $table->string('id_pesan', 5)->nullable(); //* Foreign key ke tabel pesan
-            $table->date('tgl_faktur')->nullable();
+            $table->integer('id_pesan'); //* Foreign key ke tabel pesan
+            $table->date('tgl_faktur');
             $table->timestamps();
 
             //* Relasi dengan tabel pesan

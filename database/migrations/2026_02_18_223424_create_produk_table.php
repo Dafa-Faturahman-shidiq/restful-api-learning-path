@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('produk', function (Blueprint $table) {
             $table->string('id_produk', 5)->primary();
-            $table->string('nm_produk',30)->nullable();
-            $table->string('satuan',10)->nullable();
-            $table->decimal('harga',10, 0)->nullable();
-            $table->integer('stock')->nullable();
+            $table->string('nm_produk',30);
+            $table->string('satuan',10);
+            $table->decimal('harga',10, 0);
+            $table->integer('stock');
             $table->timestamps();
         });
     }

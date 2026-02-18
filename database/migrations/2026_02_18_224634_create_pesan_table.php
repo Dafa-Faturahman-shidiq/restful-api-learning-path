@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('pesan', function (Blueprint $table) {
             $table->integer('id_pesan')->primary();
-            $table->string('id_pelanggan', 5)->nullable(); //* Foreign key ke tabel pelanggan
-            $table->date('tgl_pesan')->nullable();
+            $table->string('id_pelanggan', 5); //* Foreign key ke tabel pelanggan
+            $table->date('tgl_pesan');
             $table->timestamps();
 
             //* Relasi dengan tabel pelanggan
             $table->foreign('id_pelanggan')
                 ->references('id_pelanggan')
                 ->on('pelanggan')
-                ->onDelete('set null');
+                ->onDelete('cascade');
         });
     }
 
