@@ -14,3 +14,5 @@ Route::get('/salam', function () {
 
 //enpoint untuk mengambil data produk
 Route::get('/produk', [ProdukController::class, 'index']);
+// Menampilkan data produk Berdasarkan id
+Route::get('/produk/{id}', [ProdukController::class, 'show']);

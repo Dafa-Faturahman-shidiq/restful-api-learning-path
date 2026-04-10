@@ -19,4 +19,25 @@ class ProdukController extends Controller
             'data' => $produk
         ], 200);
     }
+
+    public function show($id)
+    {
+        // Mencari produk Berdasarkan Primary Key
+        $produk = Produk::find($id);
+
+        // jika data ditemukan
+        if($produk){
+            return response()->json([
+            'succes' => true,
+            'message' => 'Detaik Pada Produk',
+            'data' => $produk
+            ], 200);
+        }
+
+        // jika data tidak ditemukan
+        return response()->json([
+            'succes' => false,
+            'message' => 'Data tidak ditemukan'
+        ], 404);
+    }
 }
