@@ -30,7 +30,7 @@ class ProdukController extends Controller
         if($produk){
             return response()->json([
             'succes' => true,
-            'message' => 'Detaik Pada Produk',
+            'message' => 'Detail Pada Produk',
             'data' => $produk
             ], 200);
         }
