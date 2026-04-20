@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Produk; //import model Produk
+use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
@@ -39,5 +40,32 @@ class ProdukController extends Controller
             'succes' => false,
             'message' => 'Data tidak ditemukan'
         ], 404);
+    }
+
+    public function store(Request $request)
+    {
+        // 1. Validasi Input
+        $validator = Validator::make($request->all(), [
+            'id_produk' => 'required|uniqe:produk,id_produk|max:5',
+            'nm_produk' => 'require',
+            'satuan' => 'require',
+            'harga' => 'require|numeric',
+            'stock' => 'require|integer',
+        ],
+        [
+            'id_produk.required' => 'Wajib Diisi',
+            'id_produk.max' => 'Maximal 5 Karakter',
+            'nm_produk.require' => 'Nama Produk Wajib Diisi',
+            'satuan.require' => 'Satuan Wajib Diisi',
+            'harga.require' => 'Harga Wajib Diisi',
+            'stock.require' => 'Stock Wajib Diisi',
+        ]
+        );
+
+        if($validator->fails()){ //jika validasi gagal
+            return response()->json($validator->errors(), 422);
+        }
+
+
     }
 }
