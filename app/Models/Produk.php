@@ -15,10 +15,10 @@ class Produk extends Model
 
     protected $fillable = [
         'id_produk',
-        'nama_produk',
+        'nm_produk',
         'satuan',
         'harga',
-        'stok',
+        'stock',
     ];
 
 }
