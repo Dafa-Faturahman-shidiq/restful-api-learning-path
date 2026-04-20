@@ -18,3 +18,5 @@ Route::get('/produk/{id}', [ProdukController::class, 'show']);
 Route::post('/produk', [ProdukController::class, 'store']);
 //Update Data
 Route::put('/produk/{id}', [ProdukController::class, 'update']);
+//Hapus Data
+Route::delete('/produk/{id}', [ProdukController::class, 'destroy']);

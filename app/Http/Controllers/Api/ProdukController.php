@@ -119,6 +119,26 @@ class ProdukController extends Controller
             'success' => true,
             'message' => "Data Produk Berhasil Diubah",
             'data' => $produk
-        ], 200); // 201 artinya "Created"
+        ], 200); // 200 artinya "Berhasil"
+    }
+
+    public function destroy($id)
+    {
+        $produk = Produk::find($id); // 1. Cari Produk berdasarkan id
+
+        if (!$produk) { //! jika data Tidak ada
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Tidak Ditemukan'
+            ], 404);
+        }
+
+        $produk->delete();
+
+        return response()->json([ // 4. Return Respone Berhasil
+            'success' => true,
+            'message' => "Data Produk Berhasil Hapus"
+        ], 200); // 200 artinya "Berhasil"
+
     }
 }
