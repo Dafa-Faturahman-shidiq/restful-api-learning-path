@@ -68,7 +68,7 @@ class ProdukController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $produk = Produk::create([ // 3. Simpan Data Ke DB
+        $produk = Produk::create([ // 3. Simpan Data Ke DB (INSERT)
             // field di database
             'id_produk' => $request->id_produk,
             'nm_produk' => $request->nm_produk,
@@ -85,5 +85,40 @@ class ProdukController extends Controller
     }
 
     // Update Data
-    
+    public function update(Request $request, $id)
+    {
+        $produk = Produk::find($id); // 1. Cari Produk berdasarkan id
+
+        if (!$produk) { //! jika data Tidak ad
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Tidak Ditemukan'
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [ // 2. Validasi Input
+            'nm_produk' => 'required',
+            'satuan' => 'required',
+            'harga' => 'required|numeric',
+            'stock' => 'required|integer'
+        ]);
+
+        if($validator->fails()){ // 3. jika validasi gagal
+            return response()->json($validator->errors(), 422);
+        }
+
+        $produk->update([ // 3. Update Data Ke DB
+            // field di database
+            'nm_produk' => $request->nm_produk,
+            'satuan' => $request->satuan,
+            'harga' => $request->harga,
+            'stock' => $request->stock
+        ]);
+
+        return response()->json([ // 4. Return Respone Berhasil
+            'success' => true,
+            'message' => "Data Produk Berhasil Diubah",
+            'data' => $produk
+        ], 200); // 201 artinya "Created"
+    }
 }
