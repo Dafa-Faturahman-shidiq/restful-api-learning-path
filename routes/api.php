@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PelangganController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,16 @@ Route::post('/produk', [ProdukController::class, 'store']);
 Route::put('/produk/{id}', [ProdukController::class, 'update']);
 //Hapus Data
 Route::delete('/produk/{id}', [ProdukController::class, 'destroy']);
+
+//* pelanggan
+// 1. Daftar
+Route::get('/pelanggan', [PelangganController::class, 'index']);
+//2. detail
+Route::get('/pelanggan/{id}', [PelangganController::class, 'show']);
+//3. insert
+Route::post('/pelanggan', [PelangganController::class, 'store']);
+// 4. update
+Route::put('/pelanggan/{id}', [PelangganController::class, 'update']);
+// 5. delete
+Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy']);
+
