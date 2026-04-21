@@ -72,4 +72,61 @@ class PelangganController extends Controller
             'data' => $pelanggan
         ], 200);
     }
+
+    public function update(Request $request, $id)
+    {
+        $pelanggan = Pelanggan::find($id);
+
+        // jika data tidak ada
+        if(!$pelanggan){
+            return response()->json([
+                'success' => false,
+                'message' => "Data Tidak DItemukan"
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'nm_pelanggan' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'email' => 'required|email|unique:pelanggan,email'
+        ]);
+
+        // jika validasi gagal
+        if($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
+
+        $pelanggan->update($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Diubah',
+            'data' => $pelanggan
+        ], 200);
+
+
+    }
+
+    public function destroy($id)
+    {
+        $pelanggan = Pelanggan::find($id);
+
+        if(!$pelanggan)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Tidak Ditemukan'
+            ], 404);
+        }
+
+        $pelanggan->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Dihapus',
+            'data' => $pelanggan
+        ], 200);
+
+    }
 }
